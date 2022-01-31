@@ -401,7 +401,8 @@ void TabViewItem::OnPointerMoved(winrt::PointerRoutedEventArgs const& args)
 
     if (m_isCheckingforMouseDrag)
     {
-        this->Background(winrt::SolidColorBrush(winrt::Colors::Red()));
+        winrt::VisualStateManager::GoToState(*this, L"Dragging"sv, false);
+        m_isCheckingforMouseDrag = false;
     }
 }
 
@@ -409,6 +410,7 @@ void TabViewItem::OnPointerReleased(winrt::PointerRoutedEventArgs const& args)
 {
     __super::OnPointerReleased(args);
 
+    winrt::VisualStateManager::GoToState(*this, L"NotDragging"sv, false);
     m_isCheckingforMouseDrag = false;
 
     if (m_hasPointerCapture)
@@ -482,6 +484,8 @@ void TabViewItem::OnPointerCanceled(winrt::PointerRoutedEventArgs const& args)
 {
     __super::OnPointerCanceled(args);
 
+    //m_isCheckingforMouseDrag = false;
+
     if (m_hasPointerCapture)
     {
         ReleasePointerCapture(args.Pointer());
@@ -495,6 +499,7 @@ void TabViewItem::OnPointerCaptureLost(winrt::PointerRoutedEventArgs const& args
 {
     __super::OnPointerCaptureLost(args);
 
+    //m_isCheckingforMouseDrag = false;
     m_hasPointerCapture = false;
     m_isMiddlePointerButtonPressed = false;
     RestoreLeftAdjacentTabSeparatorVisibility();
