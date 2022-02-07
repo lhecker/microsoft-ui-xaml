@@ -707,6 +707,9 @@
                                     <VisualState.Setters>
                                         <Setter Target="TabDragVisualContainer.Visibility" Value="Visible" />
                                         <Setter Target="SelectedBackgroundPath.Opacity" Value="0" />
+                                        <Setter Target="LeftRadiusRenderArc.Opacity" Value="0" />
+                                        <Setter Target="RightRadiusRenderArc.Opacity" Value="0" />
+                                        <Setter Target="TabContainer.Background" Value="Transparent" />
                                     </VisualState.Setters>
                                 </VisualState>
                             </VisualStateGroup>

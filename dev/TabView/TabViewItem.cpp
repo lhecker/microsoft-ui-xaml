@@ -416,6 +416,11 @@ void TabViewItem::OnPointerReleased(winrt::PointerRoutedEventArgs const& args)
 
     m_isCheckingforMouseDrag = false;
 
+    if (!m_isDragging)
+    {
+        winrt::VisualStateManager::GoToState(*this, L"DragDropVisualNotVisible"sv, false);
+    }
+    
     if (m_hasPointerCapture)
     {
         if (args.GetCurrentPoint(nullptr).Properties().PointerUpdateKind() == winrt::PointerUpdateKind::MiddleButtonReleased)
